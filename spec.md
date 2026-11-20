@@ -133,7 +133,7 @@ genc -h | genc <команда> -h
 04-coding/internal/pwd/                 pwd.go
 04-coding/internal/secretmem/           do_on.go, do_off.go
 04-coding/internal/cli/                 cli.go
-05-structural-testing/        методика, графы и результаты структурных тестов
+05-structural-testing/        исходники тестов Go, методика, графы и результаты
 06-functional-testing/        сценарии запуска CLI и результаты
 docs/report/                  общий отчёт (Typst)
 Makefile, README.md, AGENTS.md, spec.md, go.mod
@@ -197,7 +197,7 @@ Argon2id с настройками по умолчанию медленный, �
 - При ошибке выходной файл не создаётся.
 - Пароли не совпали; пустой пароль; `in == out`; `out` существует с и без `-force`.
 
-Команды проверки: `gofmt -l .` (пусто), `go vet ./...`, `go test -race ./...`, `GOEXPERIMENT=runtimesecret go test ./...`.
+Проверки запускаются из корня проекта. Команда `gofmt -l .` должна выдавать пустой список. Цели `make vet test structural fuzz` подключают тесты из раздела 5 с помощью флага `-overlay`. Цель `make test` запускает тесты с детектором гонок и с `GOEXPERIMENT=runtimesecret` отдельными прогонами.
 
 ## 11. Этапы
 

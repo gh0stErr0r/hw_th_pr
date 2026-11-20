@@ -1,0 +1,9 @@
+{
+  "Replace": {
+    "04-coding/internal/cli/cli_test.go": "05-structural-testing/testdata/cli/cli_test.go",
+    "04-coding/internal/core/encrypt_test.go": "05-structural-testing/testdata/core/encrypt_test.go",
+    "04-coding/internal/core/fuzz_test.go": "05-structural-testing/testdata/core/fuzz_test.go",
+    "04-coding/internal/core/header_test.go": "05-structural-testing/testdata/core/header_test.go",
+    "04-coding/internal/fsio/fsio_test.go": "05-structural-testing/testdata/fsio/fsio_test.go"
+  }
+}
