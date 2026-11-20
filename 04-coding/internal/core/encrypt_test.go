@@ -141,3 +141,19 @@ func TestEncryptRejectsInvalidParamsAndShortRandomInput(t *testing.T) {
 		t.Fatalf("short random input = %x, %v", blob, err)
 	}
 }
+
+func TestDecryptRejectsUninitializedContainer(t *testing.T) {
+	for _, c := range []*Container{{}, nil} {
+		got, err := c.Decrypt([]byte("password"))
+		if got != nil || !errors.Is(err, ErrTooShort) {
+			t.Fatalf("Decrypt = %v, %v; want nil and ErrTooShort", got, err)
+		}
+	}
+}
+
+func TestOpenRejectsInvalidKeyLength(t *testing.T) {
+	got, err := open(nil, nil, make([]byte, NonceSize), nil, nil)
+	if got != nil || err == nil || errors.Is(err, ErrAuthFailed) {
+		t.Fatalf("open with invalid key = %v, %v; want AEAD setup error", got, err)
+	}
+}

@@ -127,13 +127,15 @@ genc -h | genc <команда> -h
 ## 7. Структура проекта и соответствие отчёту
 
 ```
-cmd/genc/main.go              точка входа, сборка зависимостей
-internal/core/                params.go, header.go, kdf.go, aead.go, encrypt.go, errors.go
-internal/fsio/                fsio.go
-internal/pwd/                 pwd.go
-internal/secretmem/           do_on.go, do_off.go
-internal/cli/                 cli.go
-docs/report/                  отчёт (Typst) с листингами из кода
+04-coding/cmd/genc/main.go    точка входа, сборка зависимостей
+04-coding/internal/core/                params.go, header.go, kdf.go, aead.go, encrypt.go, errors.go
+04-coding/internal/fsio/                fsio.go
+04-coding/internal/pwd/                 pwd.go
+04-coding/internal/secretmem/           do_on.go, do_off.go
+04-coding/internal/cli/                 cli.go
+05-structural-testing/        методика, графы и результаты структурных тестов
+06-functional-testing/        сценарии запуска CLI и результаты
+docs/report/                  общий отчёт (Typst)
 Makefile, README.md, AGENTS.md, spec.md, go.mod
 ```
 
@@ -204,7 +206,7 @@ Argon2id с настройками по умолчанию медленный, �
 3. **M2.** `core`: `deriveKey`, `seal`/`open`, `Encrypt`/`ParseContainer`/`Decrypt` + тесты.
 4. **M3.** `fsio` + тесты.
 5. **M4.** `pwd` (`term.ReadPassword`, интерфейс) и `secretmem` (оба тега) + подключение в `core`.
-6. **M5.** `cli` и `cmd/genc`, интеграционные тесты, сообщения и коды возврата.
+6. **M5.** `cli` и `04-coding/cmd/genc`, интеграционные тесты, сообщения и коды возврата.
 7. **M6.** Fuzz-цели, `README.md` (сборка, использование, ограничения), финальный прогон всех проверок.
 
 После каждого этапа запускай проверки из п. 10 и коммить отдельно.

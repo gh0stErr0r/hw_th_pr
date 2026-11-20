@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"io"
 
-	"genc/internal/secretmem"
+	"genc/04-coding/internal/secretmem"
 )
 
 // Encrypt формирует контейнер GENC v1 для переданных байтов и пароля.
@@ -46,6 +46,11 @@ func ParseContainer(blob []byte) (*Container, error) {
 
 // Decrypt проверяет тег и возвращает исходные байты в случае успеха.
 func (c *Container) Decrypt(password []byte) ([]byte, error) {
+	// Неподготовленный контейнер отклоняется до вычисления размера буфера.
+	if c == nil || len(c.sealed) < TagSize {
+		return nil, ErrTooShort
+	}
+
 	// Буфер результата выделяется вне secretmem.Do, ключ остаётся внутри.
 	dst := make([]byte, 0, len(c.sealed)-TagSize)
 	var plaintext []byte

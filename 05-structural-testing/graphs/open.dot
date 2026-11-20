@@ -1,0 +1,16 @@
+digraph open {
+  graph [bgcolor=transparent, nodesep=0.24, ranksep=0.32, pad=0.06];
+  node [shape=box, fontname="Liberation Serif", fontsize=13, margin="0.10,0.05"];
+  edge [fontname="Liberation Serif", fontsize=11, arrowsize=0.7];
+  a [label="1  Вход", shape=oval];
+  b [label="2  New вернул ошибку?", shape=diamond];
+  c [label="3  Open вернул ошибку?", shape=diamond];
+  d [label="4  Ошибка создания AEAD"];
+  e [label="5  ErrAuthFailed"];
+  f [label="6  Вернуть открытый текст"];
+  g [label="7  Выход", shape=oval];
+  a -> b;
+  b -> d [label="да"]; b -> c [label="нет"];
+  c -> e [label="да"]; c -> f [label="нет"];
+  d -> g; e -> g; f -> g;
+}

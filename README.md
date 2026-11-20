@@ -21,19 +21,37 @@ Argon2id выводит ключ из пароля и случайной сол�
 
 Запись без `-force` требует поддержки жёстких ссылок в выходном каталоге. Права выходного файла ограничены `0600`.
 
-## Проверки и отчёт
+## Разделы проекта
+
+| Раздел | Папка | Содержимое |
+|---|---|---|
+| 4. Кодирование модулей | [04-coding](04-coding/) | Единая реализация `genc`, модульные тесты Go, листинги и PDF разделов 1–4. |
+| 5. Структурное тестирование и отладка | [05-structural-testing](05-structural-testing/) | Потоковые графы, расчёт сложности, прогон покрытия, описание исправления и PDF разделов 1–5. |
+| 6. Функциональное тестирование | [06-functional-testing](06-functional-testing/) | Сценарии запуска собранного CLI через псевдотерминал, результаты и PDF разделов 1–6. |
+
+Тесты Go, которым нужен доступ к непубличным функциям, лежат рядом с этими функциями в `04-coding/internal`. Раздел 5 запускает их с измерением покрытия. Раздел 6 запускает готовый бинарный файл и использует стандартную библиотеку Python 3.
+
+## Проверки
 
 ```sh
 gofmt -l .
 make vet test fuzz
+make structural
+make functional
 ```
 
-Тесты запускаются с детектором гонок и отдельно с `GOEXPERIMENT=runtimesecret`. Экспериментальная очистка памяти действует на Linux amd64 и arm64. В обычной сборке и на macOS программа явно очищает буферы с паролями и ключом.
+Тесты Go запускаются с детектором гонок и отдельно с `GOEXPERIMENT=runtimesecret`. Экспериментальная очистка памяти действует на Linux amd64 и arm64. В обычной сборке и на macOS программа явно очищает буферы с паролями и ключом.
 
-Готовый отчёт хранится в [docs/report/main.pdf](docs/report/main.pdf). Команда пересборки из корня репозитория:
+## Отчёт
+
+Возьми PDF нужного этапа из его папки. Общие главы и оформление хранятся в `docs/report/main.typ`. Команды пересборки запускаются из корня репозитория.
 
 ```sh
-typst compile --root . docs/report/main.typ docs/report/main.pdf
+typst compile --root . --input through=4 docs/report/main.typ 04-coding/report.pdf
+typst compile --root . --input through=5 docs/report/main.typ 05-structural-testing/report.pdf
+typst compile --root . --input through=6 docs/report/main.typ 06-functional-testing/report.pdf
 ```
+
+Для обновления фактических результатов раздела 6 выполни `make build` и `python3 06-functional-testing/run.py ./genc --json 06-functional-testing/results.json`.
 
 Уточнения к первоначальным схемам описаны в [docs/DECISIONS.md](docs/DECISIONS.md).

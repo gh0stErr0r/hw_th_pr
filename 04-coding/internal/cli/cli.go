@@ -8,9 +8,9 @@ import (
 	"io"
 	"os"
 
-	"genc/internal/core"
-	"genc/internal/fsio"
-	"genc/internal/pwd"
+	"genc/04-coding/internal/core"
+	"genc/04-coding/internal/fsio"
+	"genc/04-coding/internal/pwd"
 )
 
 // Env задаёт ресурсы CLI. В тестах можно передать свой источник паролей,

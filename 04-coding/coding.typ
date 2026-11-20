@@ -1,5 +1,5 @@
 #let listing(path, selector, description) = {
-  let source = read("../../" + path)
+  let source = read(path)
   let marker = "func " + selector + "("
   let parts = source.split("\n" + marker)
   assert(parts.len() == 2, message: "Не найдено уникальное объявление " + selector + " в " + path)

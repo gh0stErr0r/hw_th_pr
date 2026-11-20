@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	"genc/internal/core"
+	"genc/04-coding/internal/core"
 )
 
 type testReader struct {

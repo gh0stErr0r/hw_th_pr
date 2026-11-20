@@ -565,7 +565,10 @@ $ T(n) = O(l) + Theta(t dot m) + O(n) + O(1) + O(n) = O(n + t dot m) $ <eq-total
   caption: [Блок-схема алгоритма расшифрования файла],
 ) <fig-dec>
 
-#include "coding.typ"
+#include "../../04-coding/coding.typ"
+#let through = sys.inputs.at("through", default: "4")
+#if through in ("5", "6") { include "../../05-structural-testing/structural.typ" }
+#if through == "6" { include "../../06-functional-testing/functional.typ" }
 
 // ───────────── Список источников ─────────────
 #show bibliography: set heading(numbering: none)

@@ -4,8 +4,8 @@ import (
 	"crypto/rand"
 	"os"
 
-	"genc/internal/cli"
-	"genc/internal/core"
+	"genc/04-coding/internal/cli"
+	"genc/04-coding/internal/core"
 )
 
 // main связывает CLI с терминалом, криптографическим генератором
